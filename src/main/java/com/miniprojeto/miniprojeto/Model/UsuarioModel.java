@@ -1,11 +1,10 @@
 package com.miniprojeto.miniprojeto.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 
 @Getter
@@ -27,4 +26,13 @@ public class UsuarioModel {
 
     @Column(name = "cpf-usuario", length = 11, nullable = false)
     private String cpf;
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<EmbalagemModel> embalagens;
+
+    public UsuarioModel(String nomeUsuario, String email, String cpf) {
+        this.nomeUsuario = nomeUsuario;
+        this.email = email;
+        this.cpf = cpf;
+    }
 }

@@ -1,10 +1,10 @@
 package com.miniprojeto.miniprojeto.Model;
+
+import com.miniprojeto.miniprojeto.enumeration.Estado;
+import com.miniprojeto.miniprojeto.enumeration.Marca;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Getter
@@ -18,7 +18,19 @@ public class EmbalagemModel {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "local-para-cadastro", length = 20, nullable = false)
-    private String localCadastro;
+    @Column(name = "estado_de_cadastro", length = 20, nullable = false)
+    private Estado EstadoDeCadastro;
+    @Column(length = 5, nullable = false)
+    private int numeroDeSerie;
+    @Column(name = "marca", nullable = false)
+    private Marca marca;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private UsuarioModel usuario;
 
+    public EmbalagemModel(Estado estadoDeCadastro, int numeroDeSerie, Marca marca) {
+        this.EstadoDeCadastro = estadoDeCadastro;
+    this.numeroDeSerie = numeroDeSerie;
+    this.marca = marca;
+    }
 }
