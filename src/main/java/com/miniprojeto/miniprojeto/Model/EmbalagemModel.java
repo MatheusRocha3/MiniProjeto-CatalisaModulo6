@@ -16,12 +16,11 @@ public class EmbalagemModel {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
-
     @Column(name = "estado_de_cadastro", length = 20, nullable = false)
     private Estado EstadoDeCadastro;
-    @Column(length = 5, nullable = false)
+
+    @Column(length = 5, nullable = false, unique = true)
     private int numeroDeSerie;
-    @Column(name = "marca", nullable = false)
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private UsuarioModel usuario;
