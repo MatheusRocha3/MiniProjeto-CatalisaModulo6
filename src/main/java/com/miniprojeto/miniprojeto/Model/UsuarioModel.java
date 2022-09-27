@@ -22,10 +22,10 @@ public class UsuarioModel {
     @Column(name = "nome-usuario", length = 30, nullable = false)
     private String nomeUsuario;
 
-    @Column(name = "email-usuario", length = 30, nullable = false)
+    @Column(unique = true, name = "email-usuario", length = 30, nullable = false)
     private String email;
 
-    @Column(name = "cpf-usuario", length = 14, nullable = false)
+    @Column(unique = true, name=  "cpf-usuario", length = 11, nullable = false)
     private String cpf;
 
     @Column(name = "data-de-nascimento", length = 15, nullable = false)
