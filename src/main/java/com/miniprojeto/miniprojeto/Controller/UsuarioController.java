@@ -1,5 +1,54 @@
 package com.miniprojeto.miniprojeto.Controller;
 
+
+import com.miniprojeto.miniprojeto.Model.UsuarioModel;
+import com.miniprojeto.miniprojeto.Repository.UsuarioRepository;
+import com.miniprojeto.miniprojeto.Service.UsuarioService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(path = "/usuarios")
 public class UsuarioController {
-    //Para não ficar vazio.
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @GetMapping
+    public ResponseEntity<List<UsuarioModel>> buscarTudo () {
+        return ResponseEntity.ok(usuarioService.buscarTodos());
+    }
+
+    @GetMapping(path = "/{id}")
+    public Optional<UsuarioModel> buscaId(@PathVariable Long id){
+        return usuarioService.buscarUsuarioId(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<UsuarioModel> cadastrarUsuario(@RequestBody UsuarioModel usuarioModel){
+        UsuarioModel user = usuarioService.cadastraUsuario(usuarioModel);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<UsuarioModel> alterarCadUsuario(@PathVariable Long id,@RequestBody UsuarioModel usuarioModel){
+        if (!usuarioRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuarioService.alteraUsuario(usuarioModel));
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public void deletaUsuario(@PathVariable Long id){
+        usuarioService.deletaUsuario(id);
+    }
+
 }
