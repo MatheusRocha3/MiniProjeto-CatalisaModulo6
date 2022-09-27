@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+
 @Getter
 public class UsuarioDto {
     @NotBlank(message = "nome é obrigatório")
