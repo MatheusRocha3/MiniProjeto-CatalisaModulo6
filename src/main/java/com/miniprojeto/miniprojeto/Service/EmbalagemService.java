@@ -16,4 +16,7 @@ public class EmbalagemService {
         return embalagemRepository.findById(id);
     }
 
+    public EmbalagemModel cadastrar(EmbalagemModel embalagemModel) {
+    return embalagemRepository.save(embalagemModel);
+    }
 }

@@ -4,11 +4,13 @@ package com.miniprojeto.miniprojeto.Controller;
 import com.miniprojeto.miniprojeto.Model.UsuarioModel;
 import com.miniprojeto.miniprojeto.Repository.UsuarioRepository;
 import com.miniprojeto.miniprojeto.Service.UsuarioService;
+import com.miniprojeto.miniprojeto.dto.UsuarioDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,9 +20,8 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+@Autowired
+private UsuarioRepository usuarioRepository;
 
     @GetMapping
     public ResponseEntity<List<UsuarioModel>> buscarTudo () {
@@ -33,8 +34,8 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioModel> cadastrarUsuario(@RequestBody UsuarioModel usuarioModel){
-        UsuarioModel user = usuarioService.cadastraUsuario(usuarioModel);
+    public ResponseEntity<UsuarioModel> cadastrarUsuario(@RequestBody @Valid UsuarioDto dto){
+        UsuarioModel user = usuarioService.cadastraUsuario(dto.transformaParaObjeto());
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
@@ -47,7 +48,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deletaUsuario(@PathVariable Long id){
+    public void deletarUsuario(@PathVariable Long id){
         usuarioService.deletaUsuario(id);
     }
 

@@ -2,12 +2,13 @@ package com.miniprojeto.miniprojeto.Controller;
 
 import com.miniprojeto.miniprojeto.Model.EmbalagemModel;
 import com.miniprojeto.miniprojeto.Service.EmbalagemService;
+import com.miniprojeto.miniprojeto.dto.EmbalagemDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -21,7 +22,9 @@ public class EmbalagemController {
     public Optional<EmbalagemModel> buscaId(@PathVariable Long id){
         return embalagemService.buscaIdEmbalagem(id);
     }
-
-
-
+@PostMapping
+public ResponseEntity<EmbalagemModel> cadastrarEmbalagem(@RequestBody @Valid EmbalagemDto dto) {
+        EmbalagemModel embalagem  = embalagemService.cadastrar(dto.transformarParaObjeto());
+        return new ResponseEntity<>(embalagem, HttpStatus.CREATED);
+}
 }
