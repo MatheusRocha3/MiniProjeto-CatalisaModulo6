@@ -1,6 +1,7 @@
 package com.miniprojeto.miniprojeto.Model;
 
 import com.miniprojeto.miniprojeto.enumeration.Estado;
+import com.miniprojeto.miniprojeto.enumeration.Marca;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,12 +22,15 @@ public class EmbalagemModel {
 
     @Column(length = 5, nullable = false, unique = true)
     private int numeroDeSerie;
+    private Marca marca;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private UsuarioModel usuario;
 
-    public EmbalagemModel(Estado estadoDeCadastro, int numeroDeSerie) {
+    public EmbalagemModel(Estado estadoDeCadastro, int numeroDeSerie, Marca marca) {
         this.EstadoDeCadastro = estadoDeCadastro;
         this.numeroDeSerie = numeroDeSerie;
+        this.marca = marca;
     }
 }

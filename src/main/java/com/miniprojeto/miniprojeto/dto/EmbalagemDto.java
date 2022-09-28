@@ -2,6 +2,7 @@ package com.miniprojeto.miniprojeto.dto;
 
 import com.miniprojeto.miniprojeto.Model.EmbalagemModel;
 import com.miniprojeto.miniprojeto.enumeration.Estado;
+import com.miniprojeto.miniprojeto.enumeration.Marca;
 import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
@@ -13,6 +14,8 @@ public class EmbalagemDto {
     private Estado estadoDeCadastro;
     @NotNull(message = "numeração é obrigatória")
     private int numeroDeSerie;
+    @NotBlank(message = "marca é obrigatória")
+    private Marca marca;
 
     public EmbalagemModel transformarParaObjeto() {
         return new EmbalagemModel();
