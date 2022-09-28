@@ -19,16 +19,16 @@ public class UsuarioModel {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "nome-usuario", length = 30, nullable = false)
+    @Column(name = "nome_usuario", length = 30, nullable = false)
     private String nomeUsuario;
 
-    @Column(unique = true, name = "email-usuario", length = 30, nullable = false)
+    @Column(unique = true, name = "email_usuario", length = 30, nullable = false)
     private String email;
 
-    @Column(unique = true, name=  "cpf-usuario", length = 11, nullable = false)
+    @Column(unique = true, name=  "cpf_usuario", length = 11, nullable = false)
     private String cpf;
 
-    @Column(name = "data-de-nascimento", length = 15, nullable = false)
+    @Column(name = "data_de_nascimento", length = 15, nullable = false)
     private LocalDate dataNascimento;
 
     @Column(name = "pontos", nullable = false)
