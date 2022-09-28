@@ -48,7 +48,6 @@ public class UsuarioModel {
     @Basic(optional = false)
     @NotNull
 
-
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<EmbalagemModel> embalagens;
