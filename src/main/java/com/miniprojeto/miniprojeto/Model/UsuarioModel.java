@@ -28,7 +28,7 @@ public class UsuarioModel {
     @Column(unique = true, name=  "cpf-usuario", length = 11, nullable = false)
     private String cpf;
 
-    @Column(name = "data-de-nascimento", length = 15, nullable = false)
+    @Column(name = "data_nascimento", length = 15, nullable = false)
     private LocalDate dataNascimento;
 
     @Column(name = "pontos", nullable = false)
