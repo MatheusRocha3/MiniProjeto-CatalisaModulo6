@@ -3,10 +3,11 @@ package com.miniprojeto.miniprojeto.Service;
 import com.miniprojeto.miniprojeto.Model.UsuarioModel;
 import com.miniprojeto.miniprojeto.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class UsuarioService {
 
     @Autowired
