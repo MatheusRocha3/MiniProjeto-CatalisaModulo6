@@ -45,13 +45,11 @@ public class UsuarioModel {
 
     @Column(name = "pontos")
     private int pontos;
-    @Basic(optional = false)
-    @NotNull
 
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<EmbalagemModel> embalagens;
+
+
+
 
 
 

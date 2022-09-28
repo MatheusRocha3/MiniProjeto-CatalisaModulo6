@@ -23,7 +23,7 @@ public class UsuarioDto {
     private LocalDate dataNascimento;
 
     public UsuarioModel transformaParaObjeto() {
-        return new UsuarioModel(transformaParaObjeto().getId(), nomeUsuario, email, cpf);
+        return new UsuarioModel( nomeUsuario, email, cpf);
     }
 }
 
