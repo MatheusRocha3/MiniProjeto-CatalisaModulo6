@@ -24,7 +24,7 @@ public class EmbalagemController {
     }
     @PostMapping
     public ResponseEntity<EmbalagemModel> cadastrarEmbalagem(@RequestBody @Valid EmbalagemDto dto) {
-        EmbalagemModel embalagem  = embalagemService.cadastrar(dto);
+        EmbalagemModel embalagem  = embalagemService.cadastrar(dto.transformarParaObjeto());
         return new ResponseEntity<>(embalagem, HttpStatus.CREATED);
 }
 }

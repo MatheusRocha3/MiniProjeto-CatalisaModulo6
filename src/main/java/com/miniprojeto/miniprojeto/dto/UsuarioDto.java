@@ -1,14 +1,11 @@
 package com.miniprojeto.miniprojeto.dto;
 
 import com.miniprojeto.miniprojeto.Model.UsuarioModel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
 
 @Getter
 public class UsuarioDto {

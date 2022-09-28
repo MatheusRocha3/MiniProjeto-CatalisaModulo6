@@ -18,10 +18,7 @@ public class EmbalagemDto {
     @NotBlank(message = "marca é obrigatória")
     private Marca marca;
 
-    @NotNull(message = "favor informar Id do Usuário")
-    private Long idUsuario;
-
-    public EmbalagemModel transformarParaObjeto(UsuarioModel usuarioModel) {
-        return new EmbalagemModel(estadoDeCadastro, numeroDeSerie, marca,usuarioModel);
+    public EmbalagemModel transformarParaObjeto() {
+        return new EmbalagemModel(estadoDeCadastro, numeroDeSerie, marca,new UsuarioModel());
     }
 }
