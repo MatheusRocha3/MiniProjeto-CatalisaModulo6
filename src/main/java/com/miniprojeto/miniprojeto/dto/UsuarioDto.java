@@ -1,7 +1,9 @@
 package com.miniprojeto.miniprojeto.dto;
 
 import com.miniprojeto.miniprojeto.Model.UsuarioModel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
@@ -12,16 +14,16 @@ import java.time.LocalDate;
 public class UsuarioDto {
     @NotBlank(message = "nome é obrigatório")
     private String nomeUsuario;
-    @NotBlank(message = "cpf é obrigatório")
-    @CPF(message = "cpf é obrigatório")
-    private String cpf;
     @NotBlank(message = "email é obrigatório")
     @Email
     private String email;
-private LocalDate dataNascimento;
+    @NotBlank(message = "cpf é obrigatório")
+    @CPF
+    private String cpf;
+    private LocalDate dataNascimento;
 
     public UsuarioModel transformaParaObjeto() {
-        return new UsuarioModel();
+        return new UsuarioModel(nomeUsuario, email, cpf, dataNascimento);
     }
 }
 

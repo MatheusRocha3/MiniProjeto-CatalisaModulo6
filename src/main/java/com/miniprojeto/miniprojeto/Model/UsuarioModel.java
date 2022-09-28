@@ -37,12 +37,13 @@ public class UsuarioModel {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<EmbalagemModel> embalagens;
 
-    public UsuarioModel(long nomeUsuario, String email, String cpf, String dataNascimento) {
+    public UsuarioModel(String nomeUsuario, String email, String cpf, LocalDate dataNascimento) {
         this.nomeUsuario = nomeUsuario;
         this.email = email;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
     }
+
     public UsuarioModel(String nomeUsuario, String email, String cpf, int pontos, LocalDate dataNascimento) {
         this.nomeUsuario = nomeUsuario;
         this.email = email;
@@ -50,4 +51,5 @@ public class UsuarioModel {
         this.pontos = pontos;
         this.dataNascimento = dataNascimento;
     }
+
 }
