@@ -20,7 +20,15 @@ public class UsuarioDto {
     @NotBlank(message = "cpf é obrigatório")
     @CPF
     private String cpf;
-    private LocalDate dataNascimento;
+
+    private Integer totalPontos;
+
+    public UsuarioDto(String nomeUsuario, String cpf, String email, int totalPontos) {
+        this.nomeUsuario = nomeUsuario;
+        this.cpf = cpf;
+        this.email = email;
+        this.totalPontos = totalPontos;
+    }
 
     public UsuarioModel transformaParaObjeto() {
         return new UsuarioModel( nomeUsuario, email, cpf);

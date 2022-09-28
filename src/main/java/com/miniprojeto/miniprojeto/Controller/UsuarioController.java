@@ -30,7 +30,7 @@ private UsuarioRepository usuarioRepository;
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<UsuarioModel> buscaId(@PathVariable Long id){
+    public Optional<UsuarioDto> buscaId(@PathVariable Long id){
         return usuarioService.buscarUsuarioId(id);
     }
 

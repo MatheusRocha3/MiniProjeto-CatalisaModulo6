@@ -22,9 +22,9 @@ public class EmbalagemController {
     public Optional<EmbalagemModel> buscaId(@PathVariable Long id){
         return embalagemService.buscaIdEmbalagem(id);
     }
-@PostMapping
-public ResponseEntity<EmbalagemModel> cadastrarEmbalagem(@RequestBody @Valid EmbalagemDto dto) {
-        EmbalagemModel embalagem  = embalagemService.cadastrar(dto.transformarParaObjeto());
+    @PostMapping
+    public ResponseEntity<EmbalagemModel> cadastrarEmbalagem(@RequestBody @Valid EmbalagemDto dto) {
+        EmbalagemModel embalagem  = embalagemService.cadastrar(dto);
         return new ResponseEntity<>(embalagem, HttpStatus.CREATED);
 }
 }
