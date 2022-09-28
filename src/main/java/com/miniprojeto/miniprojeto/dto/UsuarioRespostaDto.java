@@ -14,17 +14,17 @@ public class UsuarioRespostaDto {
     private String email;
     private String cpf;
     private int pontos;
-    private LocalDate dataNascimento;
+
 
     public UsuarioRespostaDto(UsuarioModel usuarioModel) {
+
         this.nomeUsuario = usuarioModel.getNomeUsuario();
         this.email = usuarioModel.getEmail();
         this.cpf = usuarioModel.getCpf();
         this.pontos = usuarioModel.getPontos();
-        this.dataNascimento = usuarioModel.getDataNascimento();
     }
 
     public static UsuarioRespostaDto transformaEmDto(UsuarioModel usuarioModel) {
-        return new UsuarioRespostaDto(usuarioModel.getNomeUsuario(), usuarioModel.getEmail(), usuarioModel.getCpf(), usuarioModel.getPontos(), usuarioModel.getDataNascimento());
+        return new UsuarioRespostaDto(usuarioModel.getNomeUsuario(), usuarioModel.getEmail(), usuarioModel.getCpf(), usuarioModel.getPontos());
     }
 }

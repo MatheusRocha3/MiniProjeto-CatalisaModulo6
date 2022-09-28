@@ -1,9 +1,12 @@
 package com.miniprojeto.miniprojeto.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.miniprojeto.miniprojeto.dto.UsuarioDto;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,44 +16,57 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuarioss")
 public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id", nullable = false)
     private Long id;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
 
-    @Column(name = "nome_usuario", length = 30, nullable = false)
+
+    @Column(name = "nome_usuario", length = 30)
     private String nomeUsuario;
+    @Basic(optional = false)
+    @NotNull
 
-    @Column(unique = true, name = "email_usuario", length = 30, nullable = false)
+    @Column( name = "email_usuario", length = 30)
     private String email;
+    @Basic(optional = false)
+    @NotNull
 
-    @Column(unique = true, name=  "cpf_usuario", length = 11, nullable = false)
+    @Column( name=  "cpf_usuario", length = 11)
     private String cpf;
-    @Column(name = "data_de_nascimento", length = 15, nullable = false)
-    private LocalDate dataNascimento;
+    @Basic(optional = false)
+    @NotNull
 
-    @Column(name = "pontos", nullable = false)
+    @Column(name = "pontos")
     private int pontos;
+    @Basic(optional = false)
+    @NotNull
+
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<EmbalagemModel> embalagens;
 
+
+
+
+    public UsuarioModel(String nomeUsuario, String email, String cpf) {
+        this.nomeUsuario = nomeUsuario;
+        this.email = email;
+        this.cpf = cpf;
+
+    }
+
     public UsuarioModel(Long id, String nomeUsuario, String email, String cpf) {
-        this.id = id;
-        this.nomeUsuario = nomeUsuario;
-        this.email = email;
-        this.cpf = cpf;
 
     }
-
-    public UsuarioModel(String nomeUsuario, String email, String cpf, int pontos, LocalDate dataNascimento) {
-        this.nomeUsuario = nomeUsuario;
-        this.email = email;
-        this.cpf = cpf;
-        this.pontos = pontos;
-        this.dataNascimento = dataNascimento;
-    }
-
 }
+
+
+
