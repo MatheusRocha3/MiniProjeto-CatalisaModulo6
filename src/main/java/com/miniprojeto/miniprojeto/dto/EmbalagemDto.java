@@ -18,6 +18,6 @@ public class EmbalagemDto {
     private Marca marca;
 
     public EmbalagemModel transformarParaObjeto() {
-        return new EmbalagemModel();
+        return new EmbalagemModel(estadoDeCadastro, numeroDeSerie, marca);
     }
 }
