@@ -5,6 +5,7 @@ import com.miniprojeto.miniprojeto.Model.UsuarioModel;
 import com.miniprojeto.miniprojeto.Repository.UsuarioRepository;
 import com.miniprojeto.miniprojeto.Service.UsuarioService;
 import com.miniprojeto.miniprojeto.dto.UsuarioDto;
+import com.miniprojeto.miniprojeto.dto.UsuarioRespostaDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +35,9 @@ private UsuarioRepository usuarioRepository;
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioModel> cadastrarUsuario(@RequestBody @Valid UsuarioDto dto){
+    public ResponseEntity<UsuarioRespostaDto> cadastrarUsuario(@RequestBody @Valid UsuarioDto dto){
         UsuarioModel user = usuarioService.cadastraUsuario(dto.transformaParaObjeto());
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(UsuarioRespostaDto.transformaEmDto(user), HttpStatus.CREATED);
     }
 
     @PatchMapping(path = "/{id}")

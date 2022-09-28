@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Table(name = "embalagens")
 public class EmbalagemModel {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "estado_de_cadastro", length = 20, nullable = false)
     private Estado EstadoDeCadastro;

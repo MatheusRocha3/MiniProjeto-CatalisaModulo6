@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "usuarios")
 public class UsuarioModel {
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nome_usuario", length = 30, nullable = false)
@@ -41,6 +41,13 @@ public class UsuarioModel {
         this.nomeUsuario = nomeUsuario;
         this.email = email;
         this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+    }
+    public UsuarioModel(String nomeUsuario, String email, String cpf, int pontos, LocalDate dataNascimento) {
+        this.nomeUsuario = nomeUsuario;
+        this.email = email;
+        this.cpf = cpf;
+        this.pontos = pontos;
         this.dataNascimento = dataNascimento;
     }
 }
