@@ -1,6 +1,7 @@
 package com.miniprojeto.miniprojeto.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.miniprojeto.miniprojeto.dto.UsuarioDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,44 +14,39 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "usuarios")
+@Table(name = "usuarioss")
 public class UsuarioModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "nome_usuario", length = 30, nullable = false)
+    @Column(name = "nome_usuario", length = 30)
     private String nomeUsuario;
 
-    @Column(unique = true, name = "email_usuario", length = 30, nullable = false)
+    @Column( name = "email_usuario", length = 30)
     private String email;
 
-    @Column(unique = true, name=  "cpf_usuario", length = 11, nullable = false)
+    @Column( name=  "cpf_usuario", length = 11)
     private String cpf;
-    @Column(name = "data_de_nascimento", length = 15, nullable = false)
-    private LocalDate dataNascimento;
 
-    @Column(name = "pontos", nullable = false)
+    @Column(name = "pontos")
     private int pontos;
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<EmbalagemModel> embalagens;
 
-    public UsuarioModel(Long id, String nomeUsuario, String email, String cpf) {
-        this.id = id;
+
+
+
+    public UsuarioModel(String nomeUsuario, String email, String cpf) {
         this.nomeUsuario = nomeUsuario;
         this.email = email;
         this.cpf = cpf;
 
-    }
-
-    public UsuarioModel(String nomeUsuario, String email, String cpf, int pontos, LocalDate dataNascimento) {
-        this.nomeUsuario = nomeUsuario;
-        this.email = email;
-        this.cpf = cpf;
-        this.pontos = pontos;
-        this.dataNascimento = dataNascimento;
     }
 
 }
+
+
+

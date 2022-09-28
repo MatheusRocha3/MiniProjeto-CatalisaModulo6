@@ -35,7 +35,7 @@ private UsuarioRepository usuarioRepository;
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioRespostaDto> cadastrarUsuario(@RequestBody @Valid UsuarioDto dto){
+    public ResponseEntity<UsuarioRespostaDto> cadastrarUsuario(@Valid @RequestBody UsuarioDto dto){
         UsuarioModel user = usuarioService.cadastraUsuario(dto.transformaParaObjeto());
         return new ResponseEntity<>(UsuarioRespostaDto.transformaEmDto(user), HttpStatus.CREATED);
     }

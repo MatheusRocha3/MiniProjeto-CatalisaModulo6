@@ -4,7 +4,6 @@ import com.miniprojeto.miniprojeto.Model.UsuarioModel;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -21,10 +20,13 @@ public class UsuarioRespostaDto {
         this.email = usuarioModel.getEmail();
         this.cpf = usuarioModel.getCpf();
         this.pontos = usuarioModel.getPontos();
-        this.dataNascimento = usuarioModel.getDataNascimento();
+    }
+
+    public UsuarioRespostaDto(String nomeUsuario, String email, String cpf, int pontos) {
+
     }
 
     public static UsuarioRespostaDto transformaEmDto(UsuarioModel usuarioModel) {
-        return new UsuarioRespostaDto(usuarioModel.getNomeUsuario(), usuarioModel.getEmail(), usuarioModel.getCpf(), usuarioModel.getPontos(), usuarioModel.getDataNascimento());
+        return new UsuarioRespostaDto(usuarioModel.getNomeUsuario(), usuarioModel.getEmail(), usuarioModel.getCpf(), usuarioModel.getPontos());
     }
 }

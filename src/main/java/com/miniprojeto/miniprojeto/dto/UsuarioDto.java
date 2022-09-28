@@ -20,10 +20,9 @@ public class UsuarioDto {
     @NotBlank(message = "cpf é obrigatório")
     @CPF
     private String cpf;
-    private LocalDate dataNascimento;
 
     public UsuarioModel transformaParaObjeto() {
-        return new UsuarioModel(transformaParaObjeto().getId(), nomeUsuario, email, cpf);
+        return new UsuarioModel();
     }
 }
 

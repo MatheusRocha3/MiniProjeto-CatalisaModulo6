@@ -25,11 +25,7 @@ public class UsuarioSerivceTest {
 
     private UsuarioModel usuarioModel;
 
-    @BeforeEach
-    private void iniciando(){
-        MockitoAnnotations.openMocks (this);
-        UsuarioModel usuarioModel = new UsuarioModel (1L, "Letycia","letycia@gmail.com","11932598720");
-    }
+   
 
     @Test
     void exibirUsuariosTest(){
