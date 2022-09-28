@@ -44,12 +44,4 @@ public class UsuarioModel {
         this.dataNascimento = dataNascimento;
     }
 
-    public UsuarioModel(String nomeUsuario, String email, String cpf, int pontos, LocalDate dataNascimento) {
-        this.nomeUsuario = nomeUsuario;
-        this.email = email;
-        this.cpf = cpf;
-        this.pontos = pontos;
-        this.dataNascimento = dataNascimento;
-    }
-
 }
