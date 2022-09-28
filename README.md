@@ -51,6 +51,10 @@ requisição post:
 '
 }
 
+Equipe: Ana Clara ficou responsável pelas excessões e pela DTO.
+Luiz Fernando ficou responsável pelos testes unitários.
+Max William ficou responsável pelos cálculos e pelo corpo do api.
+Matheus Felipe ficou responsável pela base do código, pelos testes no Postman e por manuntenções 
 
 
 
