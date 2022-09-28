@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
 @Getter
 public class UsuarioDto {
@@ -17,6 +18,7 @@ public class UsuarioDto {
     @NotBlank(message = "email é obrigatório")
     @Email
     private String email;
+private LocalDate dataNascimento;
 
     public UsuarioModel transformaParaObjeto() {
         return new UsuarioModel();
