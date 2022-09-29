@@ -1,6 +1,7 @@
 package com.miniprojeto.miniprojeto.Controller;
 
 import com.miniprojeto.miniprojeto.Model.EmbalagemModel;
+import com.miniprojeto.miniprojeto.Model.UsuarioModel;
 import com.miniprojeto.miniprojeto.Service.EmbalagemService;
 import com.miniprojeto.miniprojeto.dto.EmbalagemDto;
 import com.miniprojeto.miniprojeto.dto.EmbalagemRespostaDto;
@@ -23,9 +24,11 @@ public class EmbalagemController {
     public Optional<EmbalagemModel> buscaId(@PathVariable Long id){
         return embalagemService.buscaIdEmbalagem(id);
     }
-    @PostMapping
-    public ResponseEntity<EmbalagemRespostaDto> cadastrarEmbalagem(@RequestBody @Valid EmbalagemDto dto) {
-        EmbalagemModel embalagem  = embalagemService.cadastrar(dto.transformarParaObjeto());
+    @PostMapping(path = "/{cpf}")
+    public ResponseEntity<EmbalagemRespostaDto> cadastrarEmbalagem(@RequestBody @Valid EmbalagemDto dto, @PathVariable String cpf) {
+        EmbalagemModel embalagem  = embalagemService.cadastrar(dto.transformarParaObjeto(), cpf);
         return new ResponseEntity<>(EmbalagemRespostaDto.transformaEmbDto(embalagem), HttpStatus.CREATED);
 }
+
+
 }

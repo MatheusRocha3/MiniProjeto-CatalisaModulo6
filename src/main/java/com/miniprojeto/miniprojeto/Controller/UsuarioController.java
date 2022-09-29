@@ -21,27 +21,33 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-@Autowired
-private UsuarioRepository usuarioRepository;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping
-    public ResponseEntity<List<UsuarioModel>> buscarTudo () {
+    public ResponseEntity<List<UsuarioModel>> buscarTudo() {
         return ResponseEntity.ok(usuarioService.buscarTodos());
     }
 
     @GetMapping(path = "/{id}")
-    public Optional<UsuarioDto> buscaId(@PathVariable Long id){
+    public Optional<UsuarioDto> buscaId(@PathVariable Long id) {
         return usuarioService.buscarUsuarioId(id);
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioRespostaDto> cadastrarUsuario(@RequestBody @Valid UsuarioDto dto){
+    public ResponseEntity<UsuarioRespostaDto> cadastrarUsuario(@RequestBody @Valid UsuarioDto dto) {
         UsuarioModel user = usuarioService.cadastraUsuario(dto.transformaParaObjeto());
         return new ResponseEntity<>(UsuarioRespostaDto.transformaEmDto(user), HttpStatus.CREATED);
     }
 
+
+    @GetMapping(path = "/cpf/{cpf}")
+    public UsuarioModel findByCpf(@PathVariable String cpf) {
+        return usuarioService.findByCpf(cpf);
+    }
+
     @PatchMapping(path = "/{id}")
-    public ResponseEntity<UsuarioModel> alterarCadUsuario(@PathVariable Long id,@RequestBody UsuarioModel usuarioModel){
+    public ResponseEntity<UsuarioModel> alterarCadUsuario(@PathVariable Long id, @RequestBody UsuarioModel usuarioModel) {
         if (!usuarioRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -49,8 +55,12 @@ private UsuarioRepository usuarioRepository;
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deletarUsuario(@PathVariable Long id){
+    public void deletarUsuario(@PathVariable Long id) {
         usuarioService.deletaUsuario(id);
     }
 
+    @DeleteMapping(path = "/deletebycpf/{cpf}")
+    public void deletarUsuarioPorCpf(@PathVariable String cpf) {
+        usuarioService.deleteByCpf(cpf);
+    }
 }
