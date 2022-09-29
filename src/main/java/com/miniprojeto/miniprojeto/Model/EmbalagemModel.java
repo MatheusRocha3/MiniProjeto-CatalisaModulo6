@@ -30,10 +30,10 @@ public class EmbalagemModel {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private UsuarioModel usuario;
 
-    public EmbalagemModel(Estado estadoDeCadastro, int numeroDeSerie, Marca marca, UsuarioModel usuarioModel) {
+    public EmbalagemModel(Estado estadoDeCadastro, int numeroDeSerie, Marca marca, UsuarioModel usuario) {
         this.EstadoDeCadastro = estadoDeCadastro;
         this.numeroDeSerie = numeroDeSerie;
         this.marca = marca;
-        this.usuario = usuarioModel;
+        this.usuario = usuario;
     }
 }
