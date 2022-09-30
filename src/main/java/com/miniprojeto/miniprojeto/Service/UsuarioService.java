@@ -25,16 +25,17 @@ public class UsuarioService {
 
         int totalPontos = usuarioModel.getEmbalagens().size() * 1500;
         usuarioModel.setTotalPontos(totalPontos);
-return usuarioRepository.save(usuarioModel);
+        return usuarioRepository.save(usuarioModel);
     }
 
-    public UsuarioModel cadastraUsuario(UsuarioModel usuarioModel) {
-        Optional<UsuarioModel> optionalUsuarioModel = usuarioRepository.findByCpf(usuarioModel.getCpf());
+    public UsuarioDto cadastraUsuario(UsuarioDto usuarioDto) {
+        Optional<UsuarioModel> optionalUsuarioModel = usuarioRepository.findByCpf(usuarioDto.getCpf());
         if (optionalUsuarioModel.isPresent()) {
             throw new ObjectNotFoundException("este cpf já consta em nossa base de dados");
         }
-
-        return usuarioRepository.save(usuarioModel);
+        UsuarioModel usuarioModel = usuarioDto.transformaParaObjeto();
+        usuarioRepository.save(usuarioModel);
+        return usuarioDto;
     }
 
     public UsuarioModel alteraUsuario(UsuarioModel usuarioModel) {
