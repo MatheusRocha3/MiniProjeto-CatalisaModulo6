@@ -18,13 +18,11 @@ public class UsuarioDto {
     @CPF
     private String cpf;
 
-    private Integer totalPontos;
 
-    public UsuarioDto(String nomeUsuario, String cpf, String email, int totalPontos) {
+    public UsuarioDto(String nomeUsuario, String cpf, String email) {
         this.nomeUsuario = nomeUsuario;
         this.cpf = cpf;
         this.email = email;
-        this.totalPontos = totalPontos;
     }
 
     public UsuarioModel transformaParaObjeto() {

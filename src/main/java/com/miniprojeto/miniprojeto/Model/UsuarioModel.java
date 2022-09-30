@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 
@@ -17,29 +15,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "usuarioss")
+@Table(name = "usuarios")
 public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-
-
     @Column(name = "nome_usuario", length = 30)
     private String nomeUsuario;
-
-
     @Column( name = "email_usuario", length = 30)
     private String email;
-
-
     @Column( name=  "cpf_usuario", length = 11)
     private String cpf;
-
-
     @Column(name = "pontos")
-    private int pontos;
+    private int totalPontos;
 
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
@@ -49,10 +38,6 @@ public class UsuarioModel {
         this.nomeUsuario = nomeUsuario;
         this.email = email;
         this.cpf = cpf;
-
-    }
-    public UsuarioModel(Long id, String nomeUsuario, String email, String cpf) {
-
     }
 }
 

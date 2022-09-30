@@ -10,7 +10,7 @@ public class UsuarioRespostaDto {
     private String nomeUsuario;
     private String email;
     private String cpf;
-    private int pontos;
+    private int totalPontos;
 
 
     public UsuarioRespostaDto(UsuarioModel usuarioModel) {
@@ -18,10 +18,10 @@ public class UsuarioRespostaDto {
         this.nomeUsuario = usuarioModel.getNomeUsuario();
         this.email = usuarioModel.getEmail();
         this.cpf = usuarioModel.getCpf();
-        this.pontos = usuarioModel.getPontos();
+        this.totalPontos = usuarioModel.getTotalPontos();
     }
 
     public static UsuarioRespostaDto transformaEmDto(UsuarioModel usuarioModel) {
-        return new UsuarioRespostaDto(usuarioModel.getNomeUsuario(), usuarioModel.getEmail(), usuarioModel.getCpf(), usuarioModel.getPontos());
+        return new UsuarioRespostaDto(usuarioModel.getNomeUsuario(), usuarioModel.getEmail(), usuarioModel.getCpf(), usuarioModel.getTotalPontos());
     }
 }

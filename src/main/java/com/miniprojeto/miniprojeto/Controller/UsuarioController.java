@@ -29,10 +29,6 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarTodos());
     }
 
-    @GetMapping(path = "/{id}")
-    public Optional<UsuarioDto> buscaId(@PathVariable Long id) {
-        return usuarioService.buscarUsuarioId(id);
-    }
 
     @PostMapping
     public ResponseEntity<UsuarioRespostaDto> cadastrarUsuario(@RequestBody @Valid UsuarioDto dto) {
@@ -42,8 +38,8 @@ public class UsuarioController {
 
 
     @GetMapping(path = "/cpf/{cpf}")
-    public UsuarioModel findByCpf(@PathVariable String cpf) {
-        return usuarioService.findByCpf(cpf);
+    public ResponseEntity<Optional<UsuarioModel>> findByCpf(@PathVariable String cpf) {
+        return ResponseEntity.ok(usuarioRepository.findByCpf(cpf));
     }
 
     @PatchMapping(path = "/{id}")

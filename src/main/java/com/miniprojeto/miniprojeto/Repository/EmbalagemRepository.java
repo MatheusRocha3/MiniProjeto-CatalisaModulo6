@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface EmbalagemRepository extends JpaRepository<EmbalagemModel, Long> {
-
+Optional<EmbalagemModel> findByNumeroDeSerie(int numeroDeSerie);
 }

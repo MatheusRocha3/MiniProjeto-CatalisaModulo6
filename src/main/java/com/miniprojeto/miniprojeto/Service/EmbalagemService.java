@@ -18,6 +18,8 @@ public class EmbalagemService {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+@Autowired
+UsuarioService usuarioService;
 
     public Optional<EmbalagemModel> buscaIdEmbalagem(Long id) {
         return embalagemRepository.findById(id);
@@ -30,7 +32,13 @@ public class EmbalagemService {
             throw new ObjectNotFoundException("não existe um usuário cadastrado com este cpf");
         }
         UsuarioModel usuarioEncontrado = optionalUsuarioModel.get();
+        Optional<EmbalagemModel> optionalEmbalagemModel = embalagemRepository.findByNumeroDeSerie(embalagemModel.getNumeroDeSerie());
+        if (optionalEmbalagemModel.isPresent()) {
+            throw new ObjectNotFoundException("Esta embalagem já foi cadastrada, tente outra.");
+        }
+        embalagemModel.getNumeroDeSerie();
         embalagemModel.setUsuario(usuarioEncontrado);
+usuarioService.adicionarPontos(usuarioEncontrado);
 
 
         return embalagemRepository.save(embalagemModel);

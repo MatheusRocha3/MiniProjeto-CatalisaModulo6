@@ -29,6 +29,4 @@ public class EmbalagemController {
         EmbalagemModel embalagem  = embalagemService.cadastrar(dto.transformarParaObjeto(), cpf);
         return new ResponseEntity<>(EmbalagemRespostaDto.transformaEmbDto(embalagem), HttpStatus.CREATED);
 }
-
-
 }
