@@ -3,6 +3,7 @@ package com.miniprojeto.miniprojeto.Service;
 import com.miniprojeto.miniprojeto.Model.UsuarioModel;
 import com.miniprojeto.miniprojeto.Repository.UsuarioRepository;
 import com.miniprojeto.miniprojeto.dto.UsuarioDto;
+import com.miniprojeto.miniprojeto.dto.UsuarioRespostaDto;
 import com.miniprojeto.miniprojeto.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,8 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public UsuarioModel adicionarPontos(UsuarioModel usuarioModel, int pontos) {
-        usuarioModel.setTotalPontos(usuarioModel.getTotalPontos() + pontos);
+    public  UsuarioModel adicionarPontos(UsuarioModel usuarioModel, int pontosPorEmbalagem) {
+        usuarioModel.setTotalPontos(usuarioModel.getTotalPontos() + pontosPorEmbalagem);
         return usuarioRepository.save(usuarioModel);
     }
 
@@ -36,18 +37,16 @@ public class UsuarioService {
         return usuarioDto;
     }
 
-    public UsuarioModel alteraUsuario(UsuarioModel usuarioModel) {
-
-        return usuarioRepository.save(usuarioModel);
-    }
-
-    public void deletaUsuario(Long id) {
-        Optional<UsuarioModel> optionalUsuarioModel = usuarioRepository.findById(id);
+    public UsuarioRespostaDto alteraUsuario(UsuarioDto usuarioDto) {
+        Optional<UsuarioModel> optionalUsuarioModel = usuarioRepository.findByCpf(usuarioDto.getCpf());
         if (optionalUsuarioModel.isEmpty()) {
-            throw new ObjectNotFoundException("não foi encontrado um usuário com este registro em nossa base de dados");
+            throw new ObjectNotFoundException("Não é possível atualizar este usuário, não há um cpf registrado com esta numeração.");
         }
-        usuarioRepository.deleteById(id);
+        UsuarioModel usuarioModel = usuarioDto.transformaParaObjeto();
+        UsuarioModel usuario = usuarioRepository.save(usuarioModel);
+        return UsuarioRespostaDto.transformaEmDto(usuario);
     }
+
 
     public void deleteByCpf(String cpf) {
         Optional<UsuarioModel> optionalUsuarioModel = usuarioRepository.findByCpf(cpf);
@@ -57,12 +56,14 @@ public class UsuarioService {
         usuarioRepository.deleteByCpf(cpf);
     }
 
-    public UsuarioModel findByCpf(String cpf) {
+    public UsuarioRespostaDto findByCpf(String cpf) {
         Optional<UsuarioModel> optionalUsuarioModel = usuarioRepository.findByCpf(cpf);
         if (optionalUsuarioModel.isEmpty()) {
-            throw new ObjectNotFoundException("não existe");
+            throw new ObjectNotFoundException("não existe um usuário registrado com o cpf : " + cpf + ".");
         }
 
-        return optionalUsuarioModel.get();
+
+
+    return UsuarioRespostaDto.transformaEmDto(optionalUsuarioModel.get());
     }
 }

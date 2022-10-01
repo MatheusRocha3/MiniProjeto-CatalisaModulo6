@@ -32,31 +32,23 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<UsuarioDto> cadastrarUsuario(@RequestBody @Valid UsuarioDto dto) {
-         UsuarioDto usuario = usuarioService.cadastraUsuario(dto);
+        UsuarioDto usuario = usuarioService.cadastraUsuario(dto);
         return new ResponseEntity<>(usuario, HttpStatus.CREATED);
     }
 
-
-    @GetMapping(path = "/cpf/{cpf}")
-    public ResponseEntity<Optional<UsuarioModel>> findByCpf(@PathVariable String cpf) {
-        return ResponseEntity.ok(usuarioRepository.findByCpf(cpf));
+    @PatchMapping
+    public ResponseEntity<UsuarioRespostaDto> alterarCadUsuario(@RequestBody @Valid UsuarioDto dto) {
+        UsuarioRespostaDto usuario = usuarioService.alteraUsuario(dto);
+        return ResponseEntity.ok(usuario);
     }
 
-    @PatchMapping(path = "/{id}")
-    public ResponseEntity<UsuarioModel> alterarCadUsuario(@PathVariable Long id, @RequestBody UsuarioModel usuarioModel) {
-        if (!usuarioRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(usuarioService.alteraUsuario(usuarioModel));
-    }
-
-    @DeleteMapping(path = "/{id}")
-    public void deletarUsuario(@PathVariable Long id) {
-        usuarioService.deletaUsuario(id);
-    }
-
-    @DeleteMapping(path = "/deletebycpf/{cpf}")
+    @DeleteMapping(path = "/{cpf}")
     public void deletarUsuarioPorCpf(@PathVariable String cpf) {
         usuarioService.deleteByCpf(cpf);
+    }
+
+    public ResponseEntity<UsuarioRespostaDto> findByCpf(@PathVariable String cpf) {
+        UsuarioRespostaDto usuario = usuarioService.findByCpf(cpf);
+        return ResponseEntity.ok(usuario);
     }
 }
