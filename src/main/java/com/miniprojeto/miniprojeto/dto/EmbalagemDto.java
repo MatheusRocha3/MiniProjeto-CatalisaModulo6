@@ -11,11 +11,11 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 public class EmbalagemDto {
-    @NotBlank(message = "Estado é obrigatório")
+    @NotNull(message = "Estado é obrigatório")
     private Estado estadoDeCadastro;
     @NotNull(message = "numeração é obrigatória")
     private int numeroDeSerie;
-    @NotBlank(message = "marca é obrigatória")
+    @NotNull(message = "marca é obrigatória")
     private Marca marca;
     private UsuarioModel usuario;
 

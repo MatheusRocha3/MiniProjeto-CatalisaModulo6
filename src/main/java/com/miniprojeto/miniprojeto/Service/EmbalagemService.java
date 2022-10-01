@@ -13,6 +13,7 @@ import java.util.Optional;
 @Service
 public class EmbalagemService {
 
+    private int pontosPorEmbalagem = 1500;
     @Autowired
     private EmbalagemRepository embalagemRepository;
 
@@ -26,21 +27,23 @@ UsuarioService usuarioService;
     }
 
     public EmbalagemModel cadastrar(EmbalagemModel embalagemModel, String cpf) {
+        Optional<EmbalagemModel> optionalEmbalagemModel = embalagemRepository.findByNumeroDeSerie(embalagemModel.getNumeroDeSerie());
+        if (optionalEmbalagemModel.isPresent()) {
+            throw new ObjectNotFoundException("Esta embalagem já foi cadastrada, tente outra.");
+        }
+        embalagemModel.getNumeroDeSerie();
+
 
         Optional<UsuarioModel> optionalUsuarioModel = usuarioRepository.findByCpf(cpf);
         if (optionalUsuarioModel.isEmpty()) {
             throw new ObjectNotFoundException("não existe um usuário cadastrado com este cpf");
         }
         UsuarioModel usuarioEncontrado = optionalUsuarioModel.get();
-        Optional<EmbalagemModel> optionalEmbalagemModel = embalagemRepository.findByNumeroDeSerie(embalagemModel.getNumeroDeSerie());
-        if (optionalEmbalagemModel.isPresent()) {
-            throw new ObjectNotFoundException("Esta embalagem já foi cadastrada, tente outra.");
-        }
-        embalagemModel.getNumeroDeSerie();
         embalagemModel.setUsuario(usuarioEncontrado);
-usuarioService.adicionarPontos(usuarioEncontrado);
+usuarioService.adicionarPontos(usuarioEncontrado, pontosPorEmbalagem);
 
 
         return embalagemRepository.save(embalagemModel);
     }
+
 }

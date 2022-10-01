@@ -21,10 +21,8 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public UsuarioModel adicionarPontos(UsuarioModel usuarioModel) {
-
-        int totalPontos = usuarioModel.getEmbalagens().size() * 1500;
-        usuarioModel.setTotalPontos(totalPontos);
+    public UsuarioModel adicionarPontos(UsuarioModel usuarioModel, int pontos) {
+        usuarioModel.setTotalPontos(usuarioModel.getTotalPontos() + pontos);
         return usuarioRepository.save(usuarioModel);
     }
 

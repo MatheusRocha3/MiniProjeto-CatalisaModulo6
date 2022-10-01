@@ -10,34 +10,36 @@ corpo:
 "nomeUsuario": "nome",
 "cpf": "11111111111",
 "email": "nome@dominio.com",
-"pontos": 0
 }
 url :
 localhost:8080/usuarios
 
-para acessar a lista de usuários acesse a requisição get insira a url:
+para visualizar a lista de usuários acesse a requisição get insira a url:
 localhost:8080/usuarios
+
 requisição delete:
 para deletar incira a url:
-localhost:8080/usuarios/1
-mais seu id:
-localhost:8080/usuarios/1
+localhost/usuarios/1
+(O número posterior à barra após a palavra usuários é referente ao id do usuário a ser buscado),
+para deletar por id,
+localhost/usuarios/1
+(O número posterior à barra após a palavra usuários é referente ao id do usuário a ser buscado),
+
+
 requisição patch:
-para atualizar insira a url mais o id correspondente da atualização:
-localhost:8080/usuarios/1
+para atualizar insira a url mais o id correspondente à ser atualizado.
+localhost/usuarios/1
+(O número posterior à barra após a palavra usuários é referente ao id do usuário a ser buscado),
+
 corpo :
 {
 "atributo" : "valor" 
 }
 
+para visualizar uma embalagem por id 
 requisição get:
-para buscar o usuário e ver sua pontuação insira requisição get e a url com o id:
-localhost:8080/usuarios/1
-
-O recurso de cadastrar embalagem ainda não está funcionando por razões desconhecidas, bug a ser resolvido.
-para visualizar uma embalagem
-requisição get:
-localhost:8080/embalagem/1
+localhost/embalagem/1
+(O número posterior à barra após a palavra embalagens é referente ao id da embalagem à ser buscada),
 
 para cadastrar:
 requisição post:
@@ -45,11 +47,21 @@ requisição post:
 "estadoDeCadastro" : "SAO_PAULO",
 "numeroDeSerie" : "12345",
 "marca" : "DORITOS",
-"usuario" : "id" : 1
 }
-}
-'
-}
+url: 
+localhost/embalagens/11111111111
+(O número posterior à barra após a palavra embalagens é referente ao cpf da embalagem à ser buscado e verificado para então ser efetuado um cadastro),
+
+Para deletar um usuário por cpf:
+requisição delete
+url:
+localhost:/deletebycpf/11111111111
+(O número posterior à barra após a palavra usuarios é referente ao cpf do usuário à ser buscado, para então, se encontrado ser deletado),
+
+Para buscar um usuário por cpf:
+requisição get:
+url
+localhost/11111111111
 
 Equipe: Ana Clara ficou responsável pelas excessões e pela DTO.
 Luiz Fernando ficou responsável pelos testes unitários.

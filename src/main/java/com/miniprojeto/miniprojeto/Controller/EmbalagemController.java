@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/embalagem")
+@RequestMapping(path = "/embalagens")
 public class EmbalagemController {
 
     @Autowired

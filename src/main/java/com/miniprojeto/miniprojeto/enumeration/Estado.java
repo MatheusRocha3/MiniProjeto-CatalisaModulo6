@@ -6,6 +6,6 @@ public enum Estado {
     MINAS_GERAIS,
     ESPIRITO_SANTO,
     BAHIA,
-    DISTRITO_FEDERAL;
+    DISTRITO_FEDERAL
 
 }
