@@ -21,7 +21,7 @@ public class UsuarioRespostaDto {
         this.totalPontos = usuarioModel.getTotalPontos();
     }
 
-    public static UsuarioRespostaDto transformaEmDto(UsuarioModel usuarioModel) {
+    public static UsuarioRespostaDto converterParaUsuarioRespostaDto(UsuarioModel usuarioModel) {
         return new UsuarioRespostaDto(usuarioModel.getNomeUsuario(), usuarioModel.getEmail(), usuarioModel.getCpf(), usuarioModel.getTotalPontos());
     }
 }

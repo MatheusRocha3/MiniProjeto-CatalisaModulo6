@@ -22,9 +22,17 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    public  UsuarioModel adicionarPontos(UsuarioModel usuarioModel, int pontosPorEmbalagem) {
+    protected UsuarioModel adicionarPontos(UsuarioModel usuarioModel, int pontosPorEmbalagem) {
         usuarioModel.setTotalPontos(usuarioModel.getTotalPontos() + pontosPorEmbalagem);
         return usuarioRepository.save(usuarioModel);
+    }
+
+    protected UsuarioModel pesquisarUsuarioPorCpf(String cpf) {
+        Optional<UsuarioModel> optionalUsuarioModel = usuarioRepository.findByCpf(cpf);
+        if (optionalUsuarioModel.isEmpty()) {
+            throw new ObjectNotFoundException("O cpf com numeração de: " + cpf + " não foi cadastrado, tente outro. ");
+        }
+        return optionalUsuarioModel.get();
     }
 
     public UsuarioDto cadastraUsuario(UsuarioDto usuarioDto) {
@@ -32,7 +40,7 @@ public class UsuarioService {
         if (optionalUsuarioModel.isPresent()) {
             throw new ObjectNotFoundException("este cpf já consta em nossa base de dados");
         }
-        UsuarioModel usuarioModel = usuarioDto.transformaParaObjeto();
+        UsuarioModel usuarioModel = usuarioDto.converterParaUsuarioModel();
         usuarioRepository.save(usuarioModel);
         return usuarioDto;
     }
@@ -42,9 +50,9 @@ public class UsuarioService {
         if (optionalUsuarioModel.isEmpty()) {
             throw new ObjectNotFoundException("Não é possível atualizar este usuário, não há um cpf registrado com esta numeração.");
         }
-        UsuarioModel usuarioModel = usuarioDto.transformaParaObjeto();
+        UsuarioModel usuarioModel = usuarioDto.converterParaUsuarioModel();
         UsuarioModel usuario = usuarioRepository.save(usuarioModel);
-        return UsuarioRespostaDto.transformaEmDto(usuario);
+        return UsuarioRespostaDto.converterParaUsuarioRespostaDto(usuario);
     }
 
 
@@ -63,7 +71,6 @@ public class UsuarioService {
         }
 
 
-
-    return UsuarioRespostaDto.transformaEmDto(optionalUsuarioModel.get());
+        return UsuarioRespostaDto.converterParaUsuarioRespostaDto(optionalUsuarioModel.get());
     }
 }

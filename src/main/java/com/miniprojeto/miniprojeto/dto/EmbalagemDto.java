@@ -6,7 +6,6 @@ import com.miniprojeto.miniprojeto.enumeration.Estado;
 import com.miniprojeto.miniprojeto.enumeration.Marca;
 import lombok.Getter;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -19,7 +18,7 @@ public class EmbalagemDto {
     private Marca marca;
     private UsuarioModel usuario;
 
-    public EmbalagemModel transformarParaObjeto() {
+    public EmbalagemModel converterParaEmbalagemModel() {
         return new EmbalagemModel(estadoDeCadastro, numeroDeSerie, marca, usuario);
     }
 }

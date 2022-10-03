@@ -25,7 +25,7 @@ public class UsuarioDto {
         this.email = email;
     }
 
-    public UsuarioModel transformaParaObjeto() {
+    public UsuarioModel converterParaUsuarioModel() {
         return new UsuarioModel( nomeUsuario, email, cpf);
     }
 }

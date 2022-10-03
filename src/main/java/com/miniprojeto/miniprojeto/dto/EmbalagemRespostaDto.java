@@ -27,7 +27,7 @@ public class EmbalagemRespostaDto {
         this.usuario = embalagemModel.getUsuario();
     }
 
-    public static EmbalagemRespostaDto transformaEmbDto(EmbalagemModel embalagemModel){
+    public static EmbalagemRespostaDto converterParaEmbalagemRespostaDto(EmbalagemModel embalagemModel){
         return new EmbalagemRespostaDto(embalagemModel.getEstadoDeCadastro(), embalagemModel.getNumeroDeSerie(), embalagemModel.getMarca(), embalagemModel.getUsuario());
     }
 }

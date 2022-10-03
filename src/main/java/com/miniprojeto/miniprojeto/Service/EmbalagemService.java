@@ -31,27 +31,22 @@ public class EmbalagemService {
             throw new ObjectNotFoundException("A embalagem com o número de : " + numeroDeSerie + " não foi registrada,  tente outra.");
         }
 
-        return EmbalagemRespostaDto.transformaEmbDto(optionalEmbalagemModel.get());
+        return EmbalagemRespostaDto.converterParaEmbalagemRespostaDto(optionalEmbalagemModel.get());
     }
 
 
     public EmbalagemRespostaDto cadastrar(EmbalagemDto embalagemDto, String cpf) {
-
-        Optional<UsuarioModel> optionalUsuarioModel = usuarioRepository.findByCpf(cpf);
-        if (optionalUsuarioModel.isEmpty()) {
-            throw new ObjectNotFoundException("não existe um usuário registrado com o cpf : " + cpf + ".");
-        }
-        UsuarioModel usuarioEncontrado = optionalUsuarioModel.get();
+        UsuarioModel usuarioEncontrado = usuarioService.pesquisarUsuarioPorCpf(cpf);
         Optional<EmbalagemModel> optionalEmbalagemModel = embalagemRepository.findByNumeroDeSerie(embalagemDto.getNumeroDeSerie());
         if (optionalEmbalagemModel.isPresent()) {
             throw new ObjectNotFoundException("A embalagem com o número de : " + embalagemDto.getNumeroDeSerie() + " já foi cadastrada, tente outra.");
         }
         embalagemDto.getNumeroDeSerie();
-        EmbalagemModel embalagemModel = embalagemDto.transformarParaObjeto();
+        EmbalagemModel embalagemModel = embalagemDto.converterParaEmbalagemModel();
         embalagemModel.setUsuario(usuarioEncontrado);
         usuarioService.adicionarPontos(usuarioEncontrado, pontosPorEmbalagem);
         EmbalagemModel embalagem = embalagemRepository.save(embalagemModel);
-        return EmbalagemRespostaDto.transformaEmbDto(embalagem);
+        return EmbalagemRespostaDto.converterParaEmbalagemRespostaDto(embalagem);
     }
 
 }
