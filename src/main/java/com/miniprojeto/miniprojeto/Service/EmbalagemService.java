@@ -3,7 +3,7 @@ package com.miniprojeto.miniprojeto.Service;
 import com.miniprojeto.miniprojeto.Model.EmbalagemModel;
 import com.miniprojeto.miniprojeto.Model.UsuarioModel;
 import com.miniprojeto.miniprojeto.Repository.EmbalagemRepository;
-import com.miniprojeto.miniprojeto.Repository.UsuarioRepository;
+
 import com.miniprojeto.miniprojeto.dto.EmbalagemDto;
 import com.miniprojeto.miniprojeto.dto.EmbalagemRespostaDto;
 import com.miniprojeto.miniprojeto.exception.ObjectNotFoundException;
@@ -15,12 +15,9 @@ import java.util.Optional;
 @Service
 public class EmbalagemService {
 
-    private int pontosPorEmbalagem = 1500;
+    private  final int pontosPorEmbalagem = 1500;
     @Autowired
     private EmbalagemRepository embalagemRepository;
-
-    @Autowired
-    UsuarioRepository usuarioRepository;
     @Autowired
     UsuarioService usuarioService;
 
@@ -34,7 +31,6 @@ public class EmbalagemService {
         return EmbalagemRespostaDto.converterParaEmbalagemRespostaDto(optionalEmbalagemModel.get());
     }
 
-
     public EmbalagemRespostaDto cadastrar(EmbalagemDto embalagemDto, String cpf) {
         UsuarioModel usuarioEncontrado = usuarioService.pesquisarUsuarioPorCpf(cpf);
         Optional<EmbalagemModel> optionalEmbalagemModel = embalagemRepository.findByNumeroDeSerie(embalagemDto.getNumeroDeSerie());
@@ -44,7 +40,8 @@ public class EmbalagemService {
         embalagemDto.getNumeroDeSerie();
         EmbalagemModel embalagemModel = embalagemDto.converterParaEmbalagemModel();
         embalagemModel.setUsuario(usuarioEncontrado);
-        usuarioService.adicionarPontos(usuarioEncontrado, pontosPorEmbalagem);
+        UsuarioModel usuario = embalagemModel.getUsuario();
+        usuarioService.adicionarPontos(usuario, pontosPorEmbalagem);
         EmbalagemModel embalagem = embalagemRepository.save(embalagemModel);
         return EmbalagemRespostaDto.converterParaEmbalagemRespostaDto(embalagem);
     }

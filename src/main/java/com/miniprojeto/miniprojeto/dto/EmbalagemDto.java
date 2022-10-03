@@ -16,9 +16,8 @@ public class EmbalagemDto {
     private int numeroDeSerie;
     @NotNull(message = "marca é obrigatória")
     private Marca marca;
-    private UsuarioModel usuario;
 
     public EmbalagemModel converterParaEmbalagemModel() {
-        return new EmbalagemModel(estadoDeCadastro, numeroDeSerie, marca, usuario);
+        return new EmbalagemModel(estadoDeCadastro, numeroDeSerie, marca);
     }
 }

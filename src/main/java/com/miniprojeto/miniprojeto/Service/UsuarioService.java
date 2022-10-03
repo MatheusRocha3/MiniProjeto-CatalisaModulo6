@@ -48,7 +48,7 @@ public class UsuarioService {
     public UsuarioRespostaDto alteraUsuario(UsuarioDto usuarioDto) {
         Optional<UsuarioModel> optionalUsuarioModel = usuarioRepository.findByCpf(usuarioDto.getCpf());
         if (optionalUsuarioModel.isEmpty()) {
-            throw new ObjectNotFoundException("Não é possível atualizar este usuário, não há um cpf registrado com esta numeração.");
+            throw new ObjectNotFoundException("Não é possível atualizar o usuário solicitado, pois não há um cpf registrado com a numeração de: " + usuarioDto.getCpf() + ".");
         }
         UsuarioModel usuarioModel = usuarioDto.converterParaUsuarioModel();
         UsuarioModel usuario = usuarioRepository.save(usuarioModel);
