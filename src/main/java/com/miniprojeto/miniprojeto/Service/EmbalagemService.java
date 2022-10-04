@@ -15,19 +15,17 @@ import java.util.Optional;
 @Service
 public class EmbalagemService {
 
-    private  final int pontosPorEmbalagem = 1500;
+    private final int pontosPorEmbalagem = 1500;
     @Autowired
     private EmbalagemRepository embalagemRepository;
     @Autowired
-    UsuarioService usuarioService;
-
+    private UsuarioService usuarioService;
 
     public EmbalagemRespostaDto findByNumeroDeSerie(int numeroDeSerie) {
         Optional<EmbalagemModel> optionalEmbalagemModel = embalagemRepository.findByNumeroDeSerie(numeroDeSerie);
         if (optionalEmbalagemModel.isEmpty()) {
             throw new ObjectNotFoundException("A embalagem com o número de : " + numeroDeSerie + " não foi registrada,  tente outra.");
         }
-
         return EmbalagemRespostaDto.converterParaEmbalagemRespostaDto(optionalEmbalagemModel.get());
     }
 
